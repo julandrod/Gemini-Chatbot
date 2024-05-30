@@ -1,0 +1,28 @@
+components:
+  schemas:
+    chatSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique chat id.
+          example: cfa0d3f5-b4ad-4481-8478-c4445c40418c
+        role:
+          type: string
+          description: The role of the user
+          example: user
+        content:
+          type: string
+          description: The chat message
+        timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the chat message
+          example: '2023-06-26T12:34:56.789Z'
+      required:
+        - role
+        - content
+      example:
+        role: "user"
+        content: "Hello chat"

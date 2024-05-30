@@ -1,0 +1,239 @@
+/chat/new:
+  post:
+    tags:
+      - Chat
+    summary: Generate new chat
+    description: The user can send messages to the Gemini API
+    security:
+      - cookieAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: Hello chat
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                code: "200"
+                message: "Chat created successfully"
+                body:
+                  text: "Hello! How can I assist you today?"
+                  chats:
+                    [
+                      {
+                        id: "f0a59f32-b337-48d5-b866-30484466e9ce",
+                        role: "user",
+                        content: "Hello chat",
+                        _id: "6657bdd6e78c3e87ba2e9f4b",
+                        createdAt: "2024-05-29T23:44:22.630Z",
+                        updatedAt: "2024-05-29T23:44:22.630Z",
+                      },
+                      {
+                        id: "f0a59f32-b337-48d5-b866-30484466e9ce",
+                        role: "assistant",
+                        content: "Hello! How can I assist you today?",
+                        _id: "6657bdd6e78c3e87ba2e9f4c",
+                        createdAt: "2024-05-29T23:44:22.633Z",
+                        updatedAt: "2024-05-29T23:44:22.633Z",
+                      },
+                    ]
+      "422":
+        description: Express-Validator error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email is required"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 422
+      "401":
+        description: User not registered or invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Invalid credentials"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 401
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
+/chat/all:
+  get:
+    tags:
+      - Chat
+    summary: Get all chats by user
+    description: Get all chats by user, the user Id is taken from the cookie
+    security:
+      - cookieAuth: []
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                code: "200"
+                message: "Chats found successfully"
+                body:
+                  chats:
+                    [
+                      {
+                        id: "f0a59f32-b337-48d5-b866-30484466e9ce",
+                        role: "user",
+                        content: "Hello chat",
+                        _id: "6657bdd6e78c3e87ba2e9f4b",
+                        createdAt: "2024-05-29T23:44:22.630Z",
+                        updatedAt: "2024-05-29T23:44:22.630Z",
+                      },
+                      {
+                        id: "f0a59f32-b337-48d5-b866-30484466e9ce",
+                        role: "assistant",
+                        content: "Hello! How can I assist you today?",
+                        _id: "6657bdd6e78c3e87ba2e9f4c",
+                        createdAt: "2024-05-29T23:44:22.633Z",
+                        updatedAt: "2024-05-29T23:44:22.633Z",
+                      },
+                    ]
+      "422":
+        description: Express-Validator error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email is required"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 422
+      "401":
+        description: User not registered or invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Invalid credentials"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 401
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
+/chat/delete:
+  delete:
+    tags:
+      - Chat
+    summary: Delete all chats by user
+    description: Delete all chats by user, the user Id is taken from the cookie
+    security:
+      - cookieAuth: []
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                code: "200"
+                message: "Chats deleted successfully"
+                body: { "chats": [] }
+      "422":
+        description: Express-Validator error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email is required"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 422
+      "401":
+        description: User not registered or invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Invalid credentials"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 401
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500

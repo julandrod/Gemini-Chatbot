@@ -1,0 +1,12 @@
+# swagger documentation
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      name: auth_token
+      in: "cookie"
+  schemas:
+tags:
+  - name: Auth
+  - name: Chat
+paths: /

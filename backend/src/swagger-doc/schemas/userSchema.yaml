@@ -1,0 +1,35 @@
+components:
+  schemas:
+    userSchema:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: Unique user id.
+          example: cfa0d3f5-b4ad-4481-8478-c4445c40418c
+        name:
+          type: string
+          description: Name of the user
+          example: julian
+        email:
+          type: string
+          description: Email of the user
+          uniqueItems: true
+          example: "julian@mail.com"
+        password: 
+          type: string
+          description: Password of the user
+          example: "123456"
+        chats:
+          type: array
+          description: Chats of the user
+          $ref: '#/components/schemas/chatSchema' 
+      required:
+        - name
+        - email
+        - password
+      example:
+        name: "julian"
+        email: "julian@mail.com"
+        password: "123456"

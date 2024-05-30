@@ -1,0 +1,296 @@
+/auth:
+  get:
+    tags:
+      - Auth
+    summary: Get all register users
+    description: get all registered users and their corresponding information
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+                  example: 200
+                message:
+                  type: string
+                  example: "Users found"
+                body:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "66579efec3bc71d8f0cae381"
+                      name:
+                        type: string
+                        example: "Julian"
+                      email:
+                        type: string
+                        example: "julian@mail.com"
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
+/auth/register:
+  post:
+    tags:
+      - Auth
+    summary: Register user
+    description: Allow a new user to register using email, name and password
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: julian
+              email:
+                type: string
+                example: julian@mail.com
+              password:
+                type: string
+                example: "123456"
+    responses:
+      "201":
+        description: Successful register
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+                  example: 201
+                message:
+                  type: string
+                  example: "User created successfully"
+                body:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "66579efec3bc71d8f0cae381"
+                    email:
+                      type: string
+                      example: "julian@mail.com"
+                    token:
+                      type: string
+                      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTc5ZWZlYzNiYzcxZDhmMGNhZTM4MSIsImVtYWlsIjoianVsaWFuQG1haWwuY29tIiwiaWF0IjoxNzE3MDE4MzY2LCJleHAiOjE3MTc2MjMxNjZ9.PqkKLIMFMvxkCeqcsc32h4HIlG72ABg0avtxSJOzTLc"
+      "422":
+        description: Express-Validator error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email is required"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 422
+      "400":
+        description: User is already registered
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email already registered"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 400
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
+/auth/login:
+  post:
+    tags:
+      - Auth
+    summary: Login user
+    description: Allow a registered user to login using email and password
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: julian@mail.com
+              password:
+                type: string
+                example: "123456"
+    responses:
+      "200":
+        description: Successful login
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+                  example: 200
+                message:
+                  type: string
+                  example: "Login successfully"
+                body:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "66579efec3bc71d8f0cae381"
+                    email:
+                      type: string
+                      example: "julian@mail.com"
+                    token:
+                      type: string
+                      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTc5ZWZlYzNiYzcxZDhmMGNhZTM4MSIsImVtYWlsIjoianVsaWFuQG1haWwuY29tIiwiaWF0IjoxNzE3MDE4MzY2LCJleHAiOjE3MTc2MjMxNjZ9.PqkKLIMFMvxkCeqcsc32h4HIlG72ABg0avtxSJOzTLc"
+      "422":
+        description: Express-Validator error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Email is required"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 422
+      "401":
+        description: User not registered or invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Invalid credentials"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 401
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
+/auth/verify:
+  get:
+    tags:
+      - Auth
+    summary: Verify user
+    description: Verify user's authentication token
+    security:
+      - cookieAuth: []
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+                  example: 200
+                message:
+                  type: string
+                  example: "User verified"
+                body:
+                  type: object
+                  properties:
+                    user:
+                      type: object
+                      properties: 
+                        name:
+                          type: string
+                          example: "julian"
+                        email:
+                          type: string
+                          example: "julian@mail.com"
+      "401":
+        description: User not registered or invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Invalid credentials"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 401
+      "500":
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Error message
+                  example: "Custom error"
+                code:
+                  type: integer
+                  description: Error code
+                  example: 500
