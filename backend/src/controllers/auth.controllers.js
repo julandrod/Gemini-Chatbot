@@ -23,6 +23,7 @@ const createCookie = ({ res, cookieName, token }) => {
   res.cookie(cookieName, token, {
     path: "/",
     domain: "gemini-chatbot-silk.vercel.app",
+    sameSite: "none",
     expires,
     httpOnly: true,
     signed: true,
