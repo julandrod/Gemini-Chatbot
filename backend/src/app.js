@@ -17,7 +17,7 @@ import { errorMiddleware, notFoundMiddleware } from "./middlewares/index.js";
 // API config
 const app = express();
 const port = process.env.PORT || 8080;
-app.use(cors({ origin: "https://gemini-chatbot-silk.vercel.app/", credentials: true }));
+app.use(cors({ origin: "https://gemini-chatbot-5pyiyaqiq-julandrods-projects.vercel.app/", credentials: true }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(morgan("dev", { skip: (req, res) => process.env.NODE_ENV === "test" }));
