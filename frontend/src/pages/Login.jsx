@@ -19,7 +19,7 @@ const Login = () => {
 
   // TODO: check if this useEffect is really necessary
   useEffect(() => {
-    dispatch(checkUserStatus());
+    // dispatch(checkUserStatus());
     if (userInfo) {
       navigate("/");
     }
