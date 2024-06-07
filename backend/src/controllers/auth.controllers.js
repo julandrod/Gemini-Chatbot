@@ -10,7 +10,7 @@ import {
 const clearCookie = ({ res, cookieName }) => {
   res.clearCookie(cookieName, {
     httpOnly: true,
-    domain: "localhost",
+    domain: "gemini-chatbot-silk.vercel.app",
     signed: true,
     path: "/",
   });
@@ -22,7 +22,7 @@ const createCookie = ({ res, cookieName, token }) => {
 
   res.cookie(cookieName, token, {
     path: "/",
-    domain: "localhost",
+    domain: "gemini-chatbot-silk.vercel.app",
     expires,
     httpOnly: true,
     signed: true,
