@@ -3,8 +3,11 @@ import { Form, Formik } from "formik";
 import { loginSchema } from "../schemas";
 import { InputForm, SectionLayout } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAuthState, setupUser } from "../features/authSlice";
-import useAuth from "../hooks/useAuth";
+import {
+  checkUserStatus,
+  selectAuthState,
+  setupUser,
+} from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -12,19 +15,17 @@ const Login = () => {
   const { userInfo, errorInfo } = useSelector(selectAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogin = useAuth();
-
   const [userIsLogin, setUserIsLogin] = useState(true);
 
   // TODO: check if this useEffect is really necessary
   useEffect(() => {
-    if (isLogin) {
+    dispatch(checkUserStatus());
+    if (userInfo) {
       navigate("/");
     }
-  }, [dispatch, isLogin, navigate]);
+  }, [dispatch, userInfo, navigate]);
 
-  console.log("page login isLogin: ", isLogin);
-  console.log(userInfo);
+  console.log("page login userInfo:", userInfo);
   console.log("page login errorInfo: ", errorInfo);
 
   const handleSubmit = async (values, actions) => {

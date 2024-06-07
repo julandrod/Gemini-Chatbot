@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "/Google_Gemini_logo.svg.png";
-import { useDispatch } from "react-redux";
-import { logOutUser } from "../features/authSlice";
-import useAuth from "../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser, selectAuthState } from "../features/authSlice";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
@@ -19,7 +18,8 @@ const NavLink = ({ onClick, to, text }) => {
 };
 
 const Navbar = () => {
-  const isLogin = useAuth();
+  // const isLogin = useAuth();
+  const {userInfo} = useSelector(selectAuthState)
   const dispatch = useDispatch();
 
   const [toggle, setToggle] = useState(false);
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div></div>
       </div>
       <div className="md:flex flex-2 gap-4 hidden ">
-        {isLogin ? (
+        {userInfo ? (
           <>
             <NavLink to="/chat" text="Chat" />
             <NavLink to="/" text="Log Out" onClick={handleLogout} />
@@ -62,12 +62,9 @@ const Navbar = () => {
             // eslint-disable-next-line react/no-unknown-property
             x-show="!showMenu"
             fill="none"
-            // eslint-disable-next-line react/no-unknown-property
-            stroke-linecap="round"
-            // eslint-disable-next-line react/no-unknown-property
-            stroke-linejoin="round"
-            // eslint-disable-next-line react/no-unknown-property
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
@@ -100,7 +97,7 @@ const Navbar = () => {
             </span>
           </div>
           <div className="flex flex-col gap-4 text-left capitalize text-xl tracking-wide text-white">
-            {isLogin ? (
+            {userInfo ? (
               <>
                 <NavLink to="/chat" text="Chat" />
                 <NavLink to="/" text="Log Out" onClick={handleLogout} />
