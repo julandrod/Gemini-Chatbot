@@ -58,7 +58,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     // Login/Register user
     builder.addCase(setupUser.pending, (state) => {
-      state.errorInfo = "";
+      state.errorInfo = null;
       state.userLoading = true;
     });
     builder.addCase(setupUser.fulfilled, (state, { payload }) => {
@@ -74,6 +74,7 @@ const authSlice = createSlice({
     // Verify user status
     builder.addCase(checkUserStatus.pending, (state) => {
       state.userLoading = true;
+      state.errorInfo = null;
     });
     builder.addCase(checkUserStatus.fulfilled, (state, { payload }) => {
       state.userLoading = false;
@@ -89,6 +90,7 @@ const authSlice = createSlice({
     // Logout user
     builder.addCase(logOutUser.pending, (state) => {
       state.userLoading = true;
+      state.errorInfo = null;
     });
     builder.addCase(logOutUser.fulfilled, (state) => {
       state.userLoading = false;
