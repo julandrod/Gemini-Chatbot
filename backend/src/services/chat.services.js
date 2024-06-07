@@ -56,10 +56,10 @@ const findAndDeleteChats = async ({ userId }) => {
   try {
     const user = await findUser(userId);
     if (userId !== user._id.toString())
-        throw new CustomError("Dont have permission", 401);
+      throw new CustomError("Dont have permission", 401);
 
     user.chats = [];
-    user.save()
+    user.save();
 
     return { chats: user.chats };
   } catch (error) {
