@@ -23,9 +23,9 @@ const Login = () => {
     }
   }, [dispatch, isLogin, navigate]);
 
-  console.log(isLogin);
+  console.log("page login isLogin: ", isLogin);
   console.log(userInfo);
-  console.log(errorInfo);
+  console.log("page login errorInfo: ", errorInfo);
 
   const handleSubmit = async (values, actions) => {
     const { name, email, password } = values;
