@@ -59,10 +59,14 @@ const Navbar = () => {
         >
           <svg
             className="w-6 h-6 text-white"
+            // eslint-disable-next-line react/no-unknown-property
             x-show="!showMenu"
             fill="none"
+            // eslint-disable-next-line react/no-unknown-property
             stroke-linecap="round"
+            // eslint-disable-next-line react/no-unknown-property
             stroke-linejoin="round"
+            // eslint-disable-next-line react/no-unknown-property
             stroke-width="2"
             viewBox="0 0 24 24"
             stroke="currentColor"
