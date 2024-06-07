@@ -26,7 +26,7 @@ const createCookie = ({ res, cookieName, token }) => {
     sameSite: "none",
     expires,
     httpOnly: true,
-    signed: true,
+    secure: true,
   });
 };
 
