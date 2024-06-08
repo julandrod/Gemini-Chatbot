@@ -2,7 +2,9 @@ import axios from "axios";
 
 const apiClient = axios.create({
   withCredentials: true,
-  baseURL: "https://gemini-chatbot-e4tn.onrender.com/api/v1",
+  baseURL: import.meta.env.VITE_BACK_URL,
 });
+
+console.log(import.meta.env.VITE_BACK_URL)
 
 export default apiClient;
