@@ -30,7 +30,7 @@ const registerUser = async ({ name, email, password }) => {
       payload: { id: newUser._id, email: newUser.email },
     });
 
-    return { id: newUser._id, email: newUser.email, token };
+    return { id: newUser._id, name: newUser.name, email: newUser.email, token };
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
@@ -48,7 +48,12 @@ const findAndLogin = async ({ email, password }) => {
       payload: { id: foundUser._id, email: foundUser.email },
     });
 
-    return { id: foundUser._id, email: foundUser.email, token };
+    return {
+      id: foundUser._id,
+      name: foundUser.name,
+      email: foundUser.email,
+      token,
+    };
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
