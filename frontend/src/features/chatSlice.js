@@ -3,9 +3,13 @@ import apiClient from "../apiClient";
 
 export const getAllChats = createAsyncThunk(
   "chat/getAllChats",
-  async (_, { rejectWithValue }) => {
+  async ({ token }, { rejectWithValue }) => {
     try {
-      const { data } = await apiClient.get("/chat/all");
+      const { data } = await apiClient.get("/chat/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -15,10 +19,17 @@ export const getAllChats = createAsyncThunk(
 
 export const getNewAnswer = createAsyncThunk(
   "chat/getNewAnswer",
-  async ({ message }, { rejectWithValue }) => {
-    console.log("message slice: ", message);
+  async ({ message, token }, { rejectWithValue }) => {
     try {
-      const { data } = await apiClient.post("/chat/new", { message });
+      const { data } = await apiClient.post(
+        "/chat/new",
+        { message },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return data;
     } catch (error) {
       rejectWithValue(error);
