@@ -11,7 +11,6 @@ const Sidebar = () => {
     roleUserChats.length - 10,
     roleUserChats.length
   );
-  console.log(lastChats);
 
   return (
     <div className="hidden lg:block w-4/12 bg-main-bg border-r border-gray-700 h-[calc(100vh-5rem)] overflow-hidden">

@@ -15,14 +15,13 @@ const Loader = () => {
 
 const ChatBoard = () => {
   const { userInfo } = useSelector(selectAuthState);
-  const name = userInfo?.body?.user?.name?.slice(0, 2);
+  const name = userInfo?.name?.slice(0, 2);
   const { chatsUser, lastAnswerLoading } = useSelector(selectChatState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("calling getAllChats");
-    dispatch(getAllChats());
-  }, [dispatch]);
+    dispatch(getAllChats({ token: userInfo.token }));
+  }, [dispatch, userInfo.token]);
 
   const divRef = useRef(null);
   useEffect(() => {

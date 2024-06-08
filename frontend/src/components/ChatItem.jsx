@@ -16,7 +16,7 @@ const Avatar = ({ name }) => {
 // eslint-disable-next-line react/prop-types
 const ChatItem = ({ role, part, username }) => {
   const messageCode = extractCode(part);
-console.log(username)
+
   return (
     <div>
       <div className="flex flex-col md:flex-row gap-4 justify-start">
@@ -30,7 +30,9 @@ console.log(username)
                 <SyntaxHighlighter
                   className="rounded-xl bg-red-600"
                   style={coldarkDark}
-                  lineProps={{style: {wordBreak: 'break-all', whiteSpace: 'pre-wrap'}}}
+                  lineProps={{
+                    style: { wordBreak: "break-all", whiteSpace: "pre-wrap" },
+                  }}
                   language="javascript"
                   wrapLongLines={true}
                   wrapLines={true}

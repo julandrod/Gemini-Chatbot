@@ -5,30 +5,28 @@ import {
   selectChatState,
   updateLocalChats,
 } from "../features/chatSlice";
+import { selectAuthState } from "../features/authSlice";
 
 const ChatInput = () => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
-  const { lastAnswer, lastAnswerLoading } = useSelector(selectChatState);
+  const { lastAnswer } = useSelector(selectChatState);
+  const { userInfo } = useSelector(selectAuthState);
 
-  console.log("last asnwer: ", lastAnswer);
 
   useEffect(() => {
     dispatch(updateLocalChats({ message: lastAnswer, role: "assistant" }));
-  },[dispatch, lastAnswer])
+  }, [dispatch, lastAnswer]);
 
   const handleChange = (e) => {
-    console.log("calling handleChange");
     setMessage(e.target.value);
   };
 
   const handleSubmitMessage = (e) => {
     e.preventDefault();
 
-    dispatch(getNewAnswer({ message }));
+    dispatch(getNewAnswer({ token: userInfo.token, message }));
     dispatch(updateLocalChats({ message, role: "user" }));
-
-    console.log("loading answer: ", lastAnswerLoading);
 
     setMessage("");
   };

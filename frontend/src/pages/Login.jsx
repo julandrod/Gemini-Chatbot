@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Login = () => {
-  const { userInfo, errorInfo } = useSelector(selectAuthState);
+  const { userInfo } = useSelector(selectAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userIsLogin, setUserIsLogin] = useState(true);
@@ -24,9 +24,6 @@ const Login = () => {
       navigate("/");
     }
   }, [dispatch, userInfo, navigate]);
-
-  console.log("page login userInfo:", userInfo);
-  console.log("page login errorInfo: ", errorInfo);
 
   const handleSubmit = async (values, actions) => {
     const { name, email, password } = values;

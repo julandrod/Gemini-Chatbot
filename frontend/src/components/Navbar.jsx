@@ -19,14 +19,16 @@ const NavLink = ({ onClick, to, text }) => {
 
 const Navbar = () => {
   // const isLogin = useAuth();
-  const {userInfo} = useSelector(selectAuthState)
+  const { userInfo } = useSelector(selectAuthState);
   const dispatch = useDispatch();
 
   const [toggle, setToggle] = useState(false);
 
   const handleLogout = () => {
     dispatch(logOutUser());
+    window.location.reload();
   };
+
 
   return (
     <nav className="flex w-full bg-main-bg h-20 py-2 top-0 z-20 fixed justify-between items-center mx-auto px-4 lg:px-36 bg-center text-main-logo font-semibold border-b border-gray-700">
@@ -52,7 +54,7 @@ const Navbar = () => {
         )}
       </div>
       {/* Mobile menu */}
-      <div className="lg:hidden flex items-center">
+      <div className="md:hidden flex items-center">
         <button
           className="outline-none mobile-menu-button"
           onClick={() => setToggle(true)}
