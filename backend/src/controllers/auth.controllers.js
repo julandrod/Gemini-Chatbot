@@ -1,4 +1,3 @@
-import { COOKIE_NAME } from "../helpers/constants.js";
 import { tryCatchWrapper, endpointResponse } from "../helpers/index.js";
 import {
   findAllUsers,
@@ -6,29 +5,6 @@ import {
   findAndVerifyUser,
   registerUser,
 } from "../services/auth.services.js";
-
-const clearCookie = ({ res, cookieName }) => {
-  res.clearCookie(cookieName, {
-    httpOnly: true,
-    domain: "gemini-chatbot-silk.vercel.app",
-    signed: true,
-    path: "/",
-  });
-};
-
-const createCookie = ({ res, cookieName, token }) => {
-  const expires = new Date();
-  expires.setDate(expires.getDate() + 7);
-
-  res.cookie(cookieName, token, {
-    path: "/",
-    domain: "gemini-chatbot-silk.vercel.app",
-    sameSite: "none",
-    expires,
-    httpOnly: true,
-    secure: true,
-  });
-};
 
 const getAllUsers = tryCatchWrapper(async (req, res, next) => {
   const users = await findAllUsers();
@@ -57,9 +33,6 @@ const createUser = tryCatchWrapper(async (req, res, next) => {
 const loginUser = tryCatchWrapper(async (req, res, next) => {
   const { email, password } = req.body;
   const infoUser = await findAndLogin({ email, password });
-
-  clearCookie({ res, cookieName: COOKIE_NAME });
-  createCookie({ res, cookieName: COOKIE_NAME, token: infoUser.token });
 
   endpointResponse({
     res,
