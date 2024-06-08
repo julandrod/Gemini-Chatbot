@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { selectAuthState } from "./features/authSlice";
 
 function App() {
-  // const isLogin = useAuth();
-  // console.log(isLogin);
   const { userInfo } = useSelector(selectAuthState);
 
   return (
