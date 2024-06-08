@@ -6,8 +6,7 @@
  * @example
  * router.post("/users", validatorMiddleware(testSchema), registerController)
  */
-import { checkSchema, validationResult } from "express-validator";
-import { CustomError } from "../helpers/index.js";
+import { validationResult } from "express-validator";
 
 export const validatorMiddleware = (validations) => {
   return async (req, res, next) => {
@@ -27,10 +26,8 @@ export const validatorMiddleware = (validations) => {
       .map((item) => item.msg)
       .join(", ");
 
-    console.log(error);
-
     // throw new CustomError(error, 422);
 
-    return res.status(422).json({error, code: 422});
+    return res.status(422).json({ error, code: 422 });
   };
 };
