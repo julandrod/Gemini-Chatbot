@@ -5,6 +5,4 @@ const apiClient = axios.create({
   baseURL: import.meta.env.VITE_BACK_URL,
 });
 
-console.log(import.meta.env.VITE_BACK_URL)
-
 export default apiClient;
