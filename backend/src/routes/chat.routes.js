@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middlewares/auth.middleware.js";
+import { authenticateUser } from "../middlewares/auth.middleware.js";
 import {
   deleteAllChats,
   generateChat,
@@ -11,10 +11,10 @@ const chatRoutes = express.Router();
 
 chatRoutes.post(
   "/new",
-  [verifyToken, validatorMiddleware(chatSchema)],
+  [authenticateUser, validatorMiddleware(chatSchema)],
   generateChat
 );
-chatRoutes.get("/all", verifyToken, getAllChats);
-chatRoutes.delete("/delete", verifyToken, deleteAllChats);
+chatRoutes.get("/all", authenticateUser, getAllChats);
+chatRoutes.delete("/delete", authenticateUser, deleteAllChats);
 
 export default chatRoutes;
