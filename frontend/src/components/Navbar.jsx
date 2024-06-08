@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "/Google_Gemini_logo.svg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser, selectAuthState } from "../features/authSlice";
@@ -21,11 +21,13 @@ const Navbar = () => {
   // const isLogin = useAuth();
   const { userInfo } = useSelector(selectAuthState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(false);
 
   const handleLogout = () => {
     dispatch(logOutUser());
+    navigate("/");
     window.location.reload();
   };
 
