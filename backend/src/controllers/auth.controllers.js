@@ -19,9 +19,6 @@ const createUser = tryCatchWrapper(async (req, res, next) => {
   const { name, email, password } = req.body;
   const newUser = await registerUser({ name, email, password });
 
-  clearCookie({ res, cookieName: COOKIE_NAME });
-  createCookie({ res, cookieName: COOKIE_NAME, token: newUser.token });
-
   endpointResponse({
     res,
     code: 201,
@@ -53,8 +50,8 @@ const verifyUser = tryCatchWrapper(async (req, res, next) => {
 });
 
 const logoutUser = tryCatchWrapper(async (req, res, next) => {
-  const {id } = res.locals.user
-  const user = await findAndVerifyUser(id)
+  const { id } = res.locals.user;
+  const user = await findAndVerifyUser(id);
 
   clearCookie({ res, cookieName: COOKIE_NAME });
 
@@ -63,6 +60,6 @@ const logoutUser = tryCatchWrapper(async (req, res, next) => {
     message: "User logged out",
     body: { user },
   });
-}) 
+});
 
 export { getAllUsers, createUser, loginUser, verifyUser, logoutUser };
