@@ -4,42 +4,46 @@ import { loginSchema } from "../schemas";
 import { InputForm, SectionLayout } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  checkUserStatus,
   selectAuthState,
   setupUser,
 } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 const Login = () => {
-  const { userInfo } = useSelector(selectAuthState);
+  const { userInfo, userLoading, errorInfo } =
+    useSelector(selectAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userIsLogin, setUserIsLogin] = useState(true);
 
-  // TODO: check if this useEffect is really necessary
   useEffect(() => {
-    dispatch(checkUserStatus());
     if (userInfo) {
       navigate("/");
     }
   }, [dispatch, userInfo, navigate]);
 
+  if (userLoading) toast("Validating user data");
+  if (errorInfo) toast.error(errorInfo.error);
+  if (userInfo) toast.success("Success");
+
   const handleSubmit = async (values, actions) => {
     const { name, email, password } = values;
     const dataUser = { name, email, password };
 
-    if (userIsLogin) {
-      dispatch(setupUser({ dataUser, endPoint: "login" }));
-    } else {
-      dispatch(setupUser({ dataUser, endPoint: "register" }));
-    }
-
+    dispatch(
+      setupUser({ dataUser, endPoint: userIsLogin ? "login" : "register" })
+    );
+    
     actions.resetForm();
   };
 
   return (
     <SectionLayout>
+      <div>
+        <Toaster />
+      </div>
       <div className="h-screen bg-hover-button flex items-center justify-center container md:mt-12 md:w-7/12 lg:w-5/12 rounded-lg">
         <Formik
           initialValues={{
