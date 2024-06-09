@@ -15,8 +15,8 @@ const Loader = () => {
 
 const ChatBoard = () => {
   const { userInfo } = useSelector(selectAuthState);
-  const name = userInfo?.name?.slice(0, 2);
   const { chatsUser, lastAnswerLoading } = useSelector(selectChatState);
+  const name = userInfo?.name?.slice(0, 2);
   const dispatch = useDispatch();
 
   useEffect(() => {
