@@ -1,118 +1,42 @@
-# PACKAGES
+## 🛠 Tech Stack
 
-✅ Install basic packages  
+![image](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![image](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white) ![image](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlebard&logoColor=fff) ![image](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) ![image](https://img.shields.io/badge/Mongoose-880000.svg?style=for-the-badge&logo=Mongoose&logoColor=white) ![image](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
 
-`npm install bcrypt cors dotenv express express-validator jsonwebtoken morgan swagger-jsdoc swagger-ui-express`
+## Ejecutar localmente
 
-✅ Install dev packages  
+Ir al directorio del proyecto
 
-`npm i @faker-js/faker -D`
-
-# DATABASES
-
-## MongoDB
-✅ Install mongoose  
-
-`npm i mongoose`
-
-✅ Create **db** folder and **connect.js** file **(db/connect.js)** and add this code:  
-
-
-```
-const mongoose = require("mongoose");
-
-const connectDB = (url) => {
-  return mongoose
-    .connect(url)
-    .then(() => console.log("MongoDB Conexion Exitosa"))
-    .catch((error) => console.log(error));
-};
-
-module.exports = connectDB;
+```bash
+  cd Gemini-Chatbot
+  cd backend
 ```
 
-✅ Change **src/app** => **// Start Api** for this lines:  
+Instalar las dependencias
 
-
-```
-const startServer = async () => {
-  try {
-    await connectDB(process.env.MONGO_URL);
-    app.listen(port, () =>
-      console.log(`Servidor iniciado en el puerto: ${port}`)
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-startServer();
+```bash
+  npm install
 ```
 
-✅ Create **models** folder
+Ejecutar el servidor
 
-## Prisma
-✅ Install prisma  
-
-`npm i prisma -D`
-
-✅ Init prisma  
-
-`npx prisma init`
-
-✅ In **services** folder add **db.js** with this code:  
-
-
-```
-const { PrismaClient } = require("@prisma/client");
-
-const prisma = new PrismaClient();
-
-module.exports = prisma;
+```bash
+  npm run dev
 ```
 
-and import in every service file  
+## Environment Variables
 
-`const prisma = require("./db.js");`
+Para ejecutar este proyecto se necesitan las siguientes variables que se deben agregar al archivo .env
 
-## Sequelize
+`PORT`: puerto en el que correra la API, por defecto es el 8080
 
-✅ Install sequelize  
+`MONGO_URLL`: url para conectar con la base de datos MongoDB
 
-`npx sequelize-cli init`
+`JWT_SECRET`: palabra secreta que usa JsonWebToken
 
-✅ Rename **config.json** to **config.js** in **config** folder
+`JWT_DURATION`: duracion del JsonWebToken
 
-✅ Add **module.exports** to **config.js** and import **dotenv**, like this:  
+`GEMINI_API_KEY`: API key para conectar con Gemini
 
+`FRONT_URL`: url del frontend desplegado, se usa para evitar problemas de cors en produccion
 
-```
-require("dotenv").config();
-
-module.exports = {
-  development: {
-    .....
-    }
-}
-```
-
-✅ In the file **/models/index.js** change  
-
-`/../config/config.json` to `/../../config/config.js`
-
-✅ Create file **.sequelizerc** with the content:
-
-```
-const path = require('path');
-
-module.exports = {
-  'config': path.resolve('config', 'config.js'),
-  'models-path': path.resolve('./database/models'),
-  'seeders-path': path.resolve('./database/seeders'),
-  'migrations-path': path.resolve('./database/migrations')
-}
-```
-
-✅ Create database:  
-
-`npx sequelize-cli db:create`
+`LOCAL_URL`: url del frontend desplegado, se usa para evitar problemas de cors de manera local 

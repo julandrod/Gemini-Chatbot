@@ -20,3 +20,49 @@ Chatbot created to consume the Gemini API, allows the user to enter a message an
 
 ![image](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![image](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white) ![image](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlebard&logoColor=fff) ![image](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) ![image](https://img.shields.io/badge/Mongoose-880000.svg?style=for-the-badge&logo=Mongoose&logoColor=white) ![image](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
 
+
+## Ejecutar localmente
+
+Clonar el proyecto
+
+```bash
+  git clone https://github.com/julandrod/Gemini-Chatbot.git
+```
+
+Ir al directorio del proyecto e instalar paquetes en el frontend
+
+```bash
+  cd Gemini-Chatbot
+  cd frontend
+```
+
+Instalar las dependencias
+
+```bash
+  npm install
+```
+
+Ejecutar el servidor
+
+```bash
+  npm run dev
+```
+
+### Repetir con el backend
+
+```bash
+  cd Gemini-Chatbot
+  cd backend
+```
+
+Instalar las dependencias
+
+```bash
+  npm install
+```
+
+Ejecutar el servidor
+
+```bash
+  npm run dev
+```
