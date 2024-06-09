@@ -3,11 +3,11 @@
 
 Chatbot created to consume the Gemini API, allows the user to enter a message and get responses in the form of a chat. The user must register and log in to be able to use the chat.
 
+![image](https://raw.githubusercontent.com/julandrod/Gemini-Chatbot/main/landingpage.png)
+![image](https://raw.githubusercontent.com/julandrod/Gemini-Chatbot/main/chatdemo.png)
 
 
 ## Demo
-
-Insert gif or link to demo
 
 🔗 https://gemini-chatbot-silk.vercel.app/ 
 ## Tech Stack
